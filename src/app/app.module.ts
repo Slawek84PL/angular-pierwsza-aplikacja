@@ -9,9 +9,9 @@ import { FooterComponent } from './footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
     HeaderComponent,
     TodoListComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule
