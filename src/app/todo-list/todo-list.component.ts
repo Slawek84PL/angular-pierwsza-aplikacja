@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Todo} from "../shared/interfaces/todo.interface";
 
 @Component({
   selector: 'app-todo-list',
@@ -6,7 +7,7 @@ import {Component} from '@angular/core';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent {
-  todos: string[] = [];
+  todos: Todo[] = [];
 
   addTodo(todo : string) : void {
 
@@ -15,7 +16,7 @@ export class TodoListComponent {
       return;
     }
 
-    this.todos.push(todo);
+    this.todos.push({name: todo, isCompleted: false});
     console.log("Aktualna lista todo: ", this.todos);
   }
 }
