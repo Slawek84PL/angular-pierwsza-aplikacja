@@ -4,10 +4,11 @@
 
 <div class="mt-5">
   <h4>Zadania</h4>
-  <ul class="list-group todos-list">
+  <ul class="list-group todos-list" *ngIf="todos.length > 0">
     <li class="list-group-item" *ngFor="let todo of todos; index as i">
       <input type="checkbox" class="form-check-input my-1" [checked]="todo.isCompleted">
       <span class="todo-item">{{i + 1}}. {{todo.name}}</span>
     </li>
   </ul>
+  <h5 *ngIf="todos.length === 0">Aktualnie brak zadań</h5>
 </div>
