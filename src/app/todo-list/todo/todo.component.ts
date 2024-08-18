@@ -10,8 +10,13 @@ export class TodoComponent {
 
   @Input() todo!: Todo;
   @Input() i!: number;
+  openModal: boolean = false;
 
   changeTodoStatus(todo: Todo) {
     todo.isCompleted = !todo.isCompleted;
+  }
+
+  toggleModal(): void {
+    this.openModal = !this.openModal;
   }
 }
