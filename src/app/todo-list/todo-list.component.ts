@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
 
 @Component({
@@ -6,9 +6,16 @@ import {Todo} from "../shared/interfaces/todo.interface";
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent {
+export class TodoListComponent implements OnChanges {
+
+  @Input() test!: string;
+
   todos: Todo[] = [];
   errorMessage = "";
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
 
   addTodo(todo: string): void {
 
@@ -27,5 +34,12 @@ export class TodoListComponent {
 
   deleteTodo(i: number) {
     this.todos = this.todos.filter((todo, index) => index !== i)
+  }
+
+  changeTodoStatus(index: number) {
+    this.todos[index] = {
+      ...this.todos[index],
+      isCompleted: !this.todos[index].isCompleted
+    }
   }
 }

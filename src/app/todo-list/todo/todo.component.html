@@ -2,7 +2,7 @@
   <input type="checkbox"
          class="form-check-input my-1"
          [checked]="todo.isCompleted"
-         (change)="changeTodoStatus(todo)">
+         (change)="changeTodoStatus()">
   <span class="todo-item" [ngClass]="{'text-decoration-line-through' : todo.isCompleted}">{{ i + 1 }}
     . {{ todo.name }}</span>
   <button class="btn btn-danger btn-sm mx-2" (click)="toggleModal()">Usuń</button>
