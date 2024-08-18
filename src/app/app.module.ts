@@ -7,6 +7,7 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { AddTodoFormComponent } from './todo-list/add-todo-form/add-todo-form.component';
+import { TodoComponent } from './todo-list/todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AddTodoFormComponent } from './todo-list/add-todo-form/add-todo-form.co
     TodoListComponent,
     FooterComponent,
     AlertComponent,
-    AddTodoFormComponent
+    AddTodoFormComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule
