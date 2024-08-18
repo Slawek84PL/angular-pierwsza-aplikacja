@@ -8,11 +8,12 @@ import {Todo} from "../shared/interfaces/todo.interface";
 })
 export class TodoListComponent {
   todos: Todo[] = [];
+  errorMessage = "";
 
   addTodo(todo : string) : void {
 
     if (todo.length <= 3) {
-      alert("Zadanie powinno mieć conajmniej 4 znaki")
+      this.errorMessage = "Zadanie powinno mieć conajmniej 4 znaki";
       return;
     }
 
@@ -24,5 +25,9 @@ export class TodoListComponent {
     todo.isCompleted = !todo.isCompleted;
     // this.todos[i].isCompleted = !this.todos[i].isCompleted;
     console.log(this.todos);
+  }
+
+  clearErrorMessage() {
+    this.errorMessage = "";
   }
 }
