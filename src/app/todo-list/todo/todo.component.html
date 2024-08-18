@@ -1,1 +1,8 @@
-<p>todo works!</p>
+<li class="list-group-item">
+  <input type="checkbox"
+         class="form-check-input my-1"
+         [checked]="todo.isCompleted"
+         (change)="changeTodoStatus(todo)">
+  <span class="todo-item" [ngClass]="{'text-decoration-line-through' : todo.isCompleted}">{{ i + 1 }}
+    . {{ todo.name }}</span>
+</li>
