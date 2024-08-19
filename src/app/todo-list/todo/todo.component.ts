@@ -9,7 +9,8 @@ import {Todo} from "../../shared/interfaces/todo.interface";
 
 // implements OnChanges
 // implements OnInit
-export class TodoComponent implements OnChanges, DoCheck {
+// implements OnChanges, DoCheck
+export class TodoComponent {
   @Input() todo!: Todo;
 
   @Input() i!: number;
@@ -17,13 +18,13 @@ export class TodoComponent implements OnChanges, DoCheck {
   @Output() changeStatus = new EventEmitter<number>();
   openModal: boolean = false;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-  }
-
-  ngDoCheck(): void {
-    console.log("ngDoCheck został wykonany");
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log(changes);
+  // }
+  //
+  // ngDoCheck(): void {
+  //   console.log("ngDoCheck został wykonany");
+  // }
 
   // constructor() {
   //   console.log('Konstruktor ' + this.todo);
@@ -34,8 +35,7 @@ export class TodoComponent implements OnChanges, DoCheck {
   // }
 
   changeTodoStatus() {
-    // this.changeStatus.emit(this.i);
-    this.todo.isCompleted = !this.todo.isCompleted;
+    this.changeStatus.emit(this.i);
   }
 
   toggleModal(): void {

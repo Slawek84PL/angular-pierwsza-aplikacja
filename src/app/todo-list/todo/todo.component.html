@@ -10,7 +10,7 @@
 
 <app-modal *ngIf="openModal" (close)="toggleModal()"
            [title]="'Czy na pewno chces usunąć zadanie o numerze ' + (i + 1) + '?'">
-  <div class="d-flex justify-content-end">
+  <div class="d-flex justify-content-end" #modalDiv>
     <button class="btn btn-danger btn-sm mx-2" (click)="deleteTodo()">Usuń</button>
     <button class="btn btn-info btn-sm" (click)="toggleModal()">Anuluj</button>
   </div>
