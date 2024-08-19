@@ -1,29 +1,28 @@
-import {AfterViewChecked, AfterViewInit, Component, Input, ViewChild, ViewChildren} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
-import {TodoComponent} from "./todo/todo.component";
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent implements AfterViewInit, AfterViewChecked {
+// implements AfterViewInit, AfterViewChecked
+export class TodoListComponent {
   @Input() test!: string;
-  @ViewChild(TodoComponent) todoComponent!: TodoComponent;
-
-  @ViewChildren(TodoComponent) todoComponents!: TodoComponent;
+  // @ViewChild(TodoComponent) todoComponent!: TodoComponent;
+  // @ViewChildren(TodoComponent) todoComponents!: TodoComponent;
   todos: Todo[] = [];
   errorMessage = "";
 
-  ngAfterViewInit(): void {
-    // console.log(this.addForm);
-    console.log(this.todoComponent);
-
-  }
-
-  ngAfterViewChecked(): void {
-    console.log(this.todoComponent);
-  }
+  // ngAfterViewInit(): void {
+  //   // console.log(this.addForm);
+  //   console.log(this.todoComponent);
+  //
+  // }
+  //
+  // ngAfterViewChecked(): void {
+  //   console.log(this.todoComponent);
+  // }
 
   // ngOnChanges(changes: SimpleChanges): void {
   //   console.log(changes);
