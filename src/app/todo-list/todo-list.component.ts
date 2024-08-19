@@ -1,24 +1,28 @@
-import {AfterViewInit, Component, Input, OnChanges, SimpleChanges, ViewChild, ViewChildren} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, Input, ViewChild, ViewChildren} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
-import {AddTodoFormComponent} from "./add-todo-form/add-todo-form.component";
+import {TodoComponent} from "./todo/todo.component";
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent implements AfterViewInit {
-
+export class TodoListComponent implements AfterViewInit, AfterViewChecked {
   @Input() test!: string;
-  @ViewChild(AddTodoFormComponent) addForm!: AddTodoFormComponent;
-  @ViewChildren(AddTodoFormComponent) addForms!: AddTodoFormComponent;
+  @ViewChild(TodoComponent) todoComponent!: TodoComponent;
+
+  @ViewChildren(TodoComponent) todoComponents!: TodoComponent;
   todos: Todo[] = [];
   errorMessage = "";
 
   ngAfterViewInit(): void {
     // console.log(this.addForm);
-    console.log(this.addForms);
+    console.log(this.todoComponent);
 
+  }
+
+  ngAfterViewChecked(): void {
+    console.log(this.todoComponent);
   }
 
   // ngOnChanges(changes: SimpleChanges): void {
@@ -33,7 +37,7 @@ export class TodoListComponent implements AfterViewInit {
     }
 
     this.todos.push({name: todo, isCompleted: false});
-    console.log("Aktualna lista todo: ", this.todos);
+    // console.log("Aktualna lista todo: ", this.todos);
   }
 
   clearErrorMessage() {
