@@ -1,21 +1,29 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, SimpleChanges, ViewChild, ViewChildren} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
+import {AddTodoFormComponent} from "./add-todo-form/add-todo-form.component";
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent implements OnChanges {
+export class TodoListComponent implements AfterViewInit {
 
   @Input() test!: string;
-
+  @ViewChild(AddTodoFormComponent) addForm!: AddTodoFormComponent;
+  @ViewChildren(AddTodoFormComponent) addForms!: AddTodoFormComponent;
   todos: Todo[] = [];
   errorMessage = "";
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+  ngAfterViewInit(): void {
+    // console.log(this.addForm);
+    console.log(this.addForms);
+
   }
+
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log(changes);
+  // }
 
   addTodo(todo: string): void {
 

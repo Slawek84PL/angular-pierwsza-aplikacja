@@ -1,4 +1,14 @@
-import {Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DoCheck, ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges, ViewChild
+} from '@angular/core';
 import {Todo} from "../../shared/interfaces/todo.interface";
 
 @Component({
@@ -10,13 +20,18 @@ import {Todo} from "../../shared/interfaces/todo.interface";
 // implements OnChanges
 // implements OnInit
 // implements OnChanges, DoCheck
-export class TodoComponent {
-  @Input() todo!: Todo;
+export class TodoComponent implements AfterViewInit {
 
+  @Input() todo!: Todo;
   @Input() i!: number;
   @Output() delete = new EventEmitter<void>();
   @Output() changeStatus = new EventEmitter<number>();
+  @ViewChild("li") li!: ElementRef;
   openModal: boolean = false;
+
+  ngAfterViewInit(): void {
+    console.log(this.li);
+  }
 
   // ngOnChanges(changes: SimpleChanges): void {
   //   console.log(changes);

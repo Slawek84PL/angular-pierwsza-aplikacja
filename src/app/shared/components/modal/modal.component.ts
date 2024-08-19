@@ -22,11 +22,11 @@ export class ModalComponent implements AfterContentInit, AfterContentChecked {
   @ContentChild('check') checkbox!: ElementRef;
 
   ngAfterContentInit(): void {
-    console.log(this.modalDiv);
+    // console.log(this.modalDiv);
   }
 
   ngAfterContentChecked(): void {
-    console.log(this.checkbox.nativeElement.checked);
+    // console.log(this.checkbox.nativeElement.checked);
   }
 
   onClose() {
