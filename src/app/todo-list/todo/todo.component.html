@@ -8,9 +8,11 @@
   <button class="btn btn-danger btn-sm mx-2" (click)="toggleModal()">Usuń</button>
 </li>
 
-<p>{{todo.name}}</p>
-<p>{{todo.name | uppercase}}</p>
+<!--<p>{{todo.name}}</p>-->
+<!--<p>{{todo.name | uppercase}}</p>-->
 <p>{{todo}}</p>
+<p>{{todo | json}}</p>
+<pre>{{todo | json}}</pre>
 
 <app-modal *ngIf="openModal" (close)="toggleModal()"
            [title]="'Czy na pewno chces usunąć zadanie o numerze ' + (i + 1) + '?'">
