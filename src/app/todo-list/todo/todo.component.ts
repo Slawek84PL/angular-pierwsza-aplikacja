@@ -21,6 +21,8 @@ export class TodoComponent {
   openModal: boolean = false;
   // timeout!: number;
 
+  keyValueTest = {name: "nazwa", number: 1}
+
   // ngAfterViewInit(): void {
   //   console.log(this.li);
   // }

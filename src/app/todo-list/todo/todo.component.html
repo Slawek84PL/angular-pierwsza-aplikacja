@@ -14,7 +14,11 @@
 <!--<p>{{todo | json}}</p>-->
 <!--<pre>{{todo | json}}</pre>-->
 <!--<p>{{todo.name | titlecase}}</p>-->
-<p>{{todo.name | slice: 0: 3}}</p>
+<!--<p>{{todo.name | slice: 0: 3}}</p>-->
+
+<p *ngFor="let item of keyValueTest | keyvalue ">
+  {{item.key}}: {{item.value}}
+</p>
 
 <app-modal *ngIf="openModal" (close)="toggleModal()"
            [title]="'Czy na pewno chces usunąć zadanie o numerze ' + (i + 1) + '?'">
