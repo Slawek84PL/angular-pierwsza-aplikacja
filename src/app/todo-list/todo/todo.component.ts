@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Todo} from "../../shared/interfaces/todo.interface";
 
 @Component({
@@ -10,7 +10,8 @@ import {Todo} from "../../shared/interfaces/todo.interface";
 // implements OnChanges
 // implements OnInit
 // implements OnChanges, DoCheck
-export class TodoComponent implements OnDestroy, OnInit {
+// implements OnDestroy, OnInit
+export class TodoComponent {
   @Input() todo!: Todo;
 
   @Input() i!: number;
@@ -18,7 +19,7 @@ export class TodoComponent implements OnDestroy, OnInit {
   @Output() changeStatus = new EventEmitter<number>();
   @ViewChild("li") li!: ElementRef;
   openModal: boolean = false;
-  timeout!: number;
+  // timeout!: number;
 
   // ngAfterViewInit(): void {
   //   console.log(this.li);
@@ -38,17 +39,17 @@ export class TodoComponent implements OnDestroy, OnInit {
   // }
   //
 
-  ngOnInit(): void {
-    this.timeout = setTimeout(() => {
-      console.log("setTimeout")
-    }, 3000);
-    // console.log('OnInit: ' + this.todo);
-  }
-
-  ngOnDestroy(): void {
-    console.log('destroyed');
-    clearTimeout(this.timeout);
-  }
+  // ngOnInit(): void {
+  //   this.timeout = setTimeout(() => {
+  //     console.log("setTimeout")
+  //   }, 3000);
+  // console.log('OnInit: ' + this.todo);
+  // }
+  //
+  // ngOnDestroy(): void {
+  //   console.log('destroyed');
+  //   clearTimeout(this.timeout);
+  // }
 
   changeTodoStatus() {
     this.changeStatus.emit(this.i);
