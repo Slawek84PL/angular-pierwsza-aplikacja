@@ -10,9 +10,10 @@
 
 <!--<p>{{todo.name}}</p>-->
 <!--<p>{{todo.name | uppercase}}</p>-->
-<p>{{todo}}</p>
-<p>{{todo | json}}</p>
-<pre>{{todo | json}}</pre>
+<!--<p>{{todo}}</p>-->
+<!--<p>{{todo | json}}</p>-->
+<!--<pre>{{todo | json}}</pre>-->
+<p>{{todo.name | titlecase}}</p>
 
 <app-modal *ngIf="openModal" (close)="toggleModal()"
            [title]="'Czy na pewno chces usunąć zadanie o numerze ' + (i + 1) + '?'">
