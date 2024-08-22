@@ -8,10 +8,13 @@
   <button class="btn btn-danger btn-sm mx-2" (click)="toggleModal()">Usuń</button>
 </li>
 
-<p>{{1.3 | number: '': 'pl'}}</p>
-<p>{{0.25 | percent: '': 'pl'}}</p>
-<p>{{10 | currency: '': '':'': 'pl'}}</p>
-<p>{{'2024.08.22' | date: 'fullDate': '': 'pl'}}</p>
+<p>{{1.3 | number: ''}}</p>
+<p>{{0.25 | percent: ''}}</p>
+<p>{{10 | currency: 'PLN': 'code':''}}</p>
+<p>{{10 | currency: 'PLN': 'symbol':''}}</p>
+<p>{{'2024.08.22' | date: 'fullDate': ''}}</p>
+<p>{{'2024.08.22' | date: 'longDate': ''}}</p>
+<p>{{'2024.08.22' | date: 'shortDate': ''}}</p>
 
 <app-modal *ngIf="openModal" (close)="toggleModal()"
            [title]="'Czy na pewno chces usunąć zadanie o numerze ' + (i + 1) + '?'">
