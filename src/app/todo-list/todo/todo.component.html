@@ -4,7 +4,7 @@
          [checked]="todo.isCompleted"
          (change)="changeTodoStatus()">
   <span class="todo-item" [ngClass]="{'text-decoration-line-through' : todo.isCompleted}">{{ i + 1 }}
-    . {{ todo.name }}</span>
+    . {{ todo.name | firstLetterUppercase }}</span>
   <button class="btn btn-danger btn-sm mx-2" (click)="toggleModal()">Usuń</button>
 </li>
 
