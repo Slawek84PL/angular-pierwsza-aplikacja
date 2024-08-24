@@ -6,7 +6,7 @@ import {Todo} from "../../shared/interfaces/todo.interface";
 })
 export class TodoService {
 
-  _todos: Todo[] = JSON.parse(localStorage.getItem("todos")!) ?? [];
+  private _todos: Todo[] = JSON.parse(localStorage.getItem("todos")!) ?? [];
 
   constructor() { }
 
@@ -15,7 +15,7 @@ export class TodoService {
   }
 
   addTodo(name: string): void {
-    this.todos.push({name, isCompleted: false});
+    this._todos.push({name, isCompleted: false});
     this.saveToLocaleStorage()
   }
 
@@ -26,8 +26,8 @@ export class TodoService {
 
   changeTodoStatus(index: number) {
     this._todos[index] = {
-      ...this._todos[index],
-      isCompleted: !this._todos[index].isCompleted
+      ...this.todos[index],
+      isCompleted: !this.todos[index].isCompleted
     }
     this.saveToLocaleStorage();
   }
