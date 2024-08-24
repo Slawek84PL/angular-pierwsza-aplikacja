@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {TodoService} from "./todo.service";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TestService {
 
   constructor(private todoService: TodoService) {
