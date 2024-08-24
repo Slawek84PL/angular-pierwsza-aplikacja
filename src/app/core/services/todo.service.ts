@@ -35,4 +35,8 @@ export class TodoService {
   saveToLocaleStorage() {
     localStorage.setItem("todos", JSON.stringify(this.todos));
   }
+
+  log() {
+    console.log("Komunikat z wstrzyknietego serwisu")
+  }
 }
