@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import {TodoService} from "./todo.service";
+import {Injectable} from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TestService {
 
-  constructor(private todoService: TodoService) {
-    todoService.log();
+  constructor() {
   }
 }
