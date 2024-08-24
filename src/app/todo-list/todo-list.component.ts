@@ -1,32 +1,25 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
+import {TodoService} from "../core/services/todo.service";
+import {TestService} from "../core/services/test.service";
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-// implements AfterViewInit, AfterViewChecked
 export class TodoListComponent {
-  @Input() test!: string;
-  // @ViewChild(TodoComponent) todoComponent!: TodoComponent;
-  // @ViewChildren(TodoComponent) todoComponents!: TodoComponent;
-  todos: Todo[] = [];
+
+  todos: Todo[] = this.todoService.todos;
   errorMessage = "";
 
-  // ngAfterViewInit(): void {
-  //   // console.log(this.addForm);
-  //   console.log(this.todoComponent);
-  //
-  // }
-  //
-  // ngAfterViewChecked(): void {
-  //   console.log(this.todoComponent);
-  // }
+  constructor(private todoService: TodoService,
+              private testService: TestService) {
+  }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log(changes);
-  // }
+  clearErrorMessage() {
+    this.errorMessage = "";
+  }
 
   addTodo(todo: string): void {
 
@@ -35,22 +28,17 @@ export class TodoListComponent {
       return;
     }
 
-    this.todos.push({name: todo, isCompleted: false});
-    // console.log("Aktualna lista todo: ", this.todos);
-  }
-
-  clearErrorMessage() {
-    this.errorMessage = "";
+    this.todoService.addTodo(todo);
+    this.todos = this.todoService.todos;
   }
 
   deleteTodo(i: number) {
-    this.todos = this.todos.filter((todo, index) => index !== i)
+    this.todoService.deleteTodo(i);
+    this.todos = this.todoService.todos;
   }
 
   changeTodoStatus(index: number) {
-    this.todos[index] = {
-      ...this.todos[index],
-      isCompleted: !this.todos[index].isCompleted
-    }
+    this.todoService.changeTodoStatus(index);
+    this.todos = this.todoService.todos;
   }
 }
