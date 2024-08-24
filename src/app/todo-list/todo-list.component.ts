@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
 import {TodoService} from "../core/services/todo.service";
 
@@ -9,12 +9,10 @@ import {TodoService} from "../core/services/todo.service";
 })
 export class TodoListComponent {
 
+  todoService = inject(TodoService);
   todos: Todo[] = this.todoService.todos;
+
   errorMessage = "";
-
-
-  constructor(private todoService: TodoService) {
-  }
 
   clearErrorMessage() {
     this.errorMessage = "";
