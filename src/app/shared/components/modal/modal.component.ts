@@ -1,5 +1,5 @@
 import {Component, ContentChild, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {of} from "rxjs";
+import {of, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-modal',
@@ -8,30 +8,23 @@ import {of} from "rxjs";
 })
 export class ModalComponent implements OnInit, OnDestroy {
 
+  @Input() title!: string;
+  @Output() close = new EventEmitter<void>();
+  @ContentChild('modalDiv') modalDiv!: ElementRef;
+  sub!: Subscription;
+
   ngOnInit(): void {
-    of([1, 2, 3], [4, 5], [6, 7]).subscribe({
-      next: value => console.log(value),
-      error: err => console.log(err),
-      complete: () => console.log("Zakończona subskrpcja tablic")
-    });
-    of("Zasubskrybowana wiadomość").subscribe({
+    this.sub = of("Zasubskrybowana wiadomość").subscribe({
       next: value => console.log(value),
       error: err => console.log(err),
       complete: () => console.log("Zakończona subskrpcja wartości")
     })
-    of({obiekt: "Zasubskrybowany obiekt"}, {obiekt: "Zasubskrybowany obiekt 2"}).subscribe({
-      next: value => console.log(value),
-      error: err => console.log(err),
-      complete: () => console.log("Zakończona subskrpcja obieków")
-    })
+    console.log(this.sub);
   }
 
   ngOnDestroy(): void {
+    console.log(this.sub);
   }
-
-  @Input() title!: string;
-  @Output() close = new EventEmitter<void>();
-  @ContentChild('modalDiv') modalDiv!: ElementRef;
 
   onClose() {
     this.close.emit();
