@@ -1,5 +1,5 @@
 import {Component, ContentChild, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {of, Subscription} from "rxjs";
+import {interval, of, Subscription, take} from "rxjs";
 
 @Component({
   selector: 'app-modal',
@@ -14,10 +14,13 @@ export class ModalComponent implements OnInit, OnDestroy {
   sub!: Subscription;
 
   ngOnInit(): void {
-    this.sub = of("Zasubskrybowana wiadomość").subscribe({
-      next: value => console.log(value),
-      error: err => console.log(err),
-      complete: () => console.log("Zakończona subskrpcja wartości")
+    // this.sub = of("Zasubskrybowana wiadomość").subscribe({
+    //   next: value => console.log(value),
+    //   error: err => console.log(err),
+    //   complete: () => console.log("Zakończona subskrpcja wartości")
+    // })
+    this.sub = interval(1000).pipe(take(5)).subscribe({
+      next: number => console.log(number)
     })
     console.log(this.sub);
   }
@@ -27,6 +30,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   onClose() {
+    // this.sub.unsubscribe();
     this.close.emit();
   }
 }
