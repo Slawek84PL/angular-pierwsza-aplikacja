@@ -12,6 +12,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Output() close = new EventEmitter<void>();
   @ContentChild('modalDiv') modalDiv!: ElementRef;
   sub!: Subscription;
+  obs$ = interval(1000);
 
   ngOnInit(): void {
     // this.sub = of("Zasubskrybowana wiadomość").subscribe({
@@ -19,14 +20,11 @@ export class ModalComponent implements OnInit, OnDestroy {
     //   error: err => console.log(err),
     //   complete: () => console.log("Zakończona subskrpcja wartości")
     // })
-    this.sub = interval(1000).pipe(take(5)).subscribe({
-      next: number => console.log(number)
-    })
-    console.log(this.sub);
+    // console.log(this.sub);
   }
 
   ngOnDestroy(): void {
-    console.log(this.sub);
+    // console.log(this.sub);
   }
 
   onClose() {
