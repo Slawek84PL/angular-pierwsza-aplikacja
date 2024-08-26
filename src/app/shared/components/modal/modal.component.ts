@@ -19,7 +19,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     //   error: err => console.log(err),
     //   complete: () => console.log("Zakończona subskrpcja wartości")
     // })
-    of(1, 2, 3).pipe(map(numb => numb * 2))
+    of([1, 2, 3]).pipe(map(numb => numb.map(n => n *2)))
       .subscribe({
         next: numb => console.log(numb)
       });
