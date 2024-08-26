@@ -1,5 +1,5 @@
 import {Component, ContentChild, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {map, of, Subscription} from "rxjs";
+import {filter, map, of, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-modal',
@@ -19,7 +19,10 @@ export class ModalComponent implements OnInit, OnDestroy {
     //   error: err => console.log(err),
     //   complete: () => console.log("Zakończona subskrpcja wartości")
     // })
-    of([1, 2, 3]).pipe(map(numb => numb.map(n => n *2)))
+    of(1, 2, 3).pipe(
+      filter(numb => numb % 2 === 0),
+      map(numb => numb * 2)
+    )
       .subscribe({
         next: numb => console.log(numb)
       });
