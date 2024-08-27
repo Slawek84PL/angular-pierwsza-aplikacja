@@ -1,20 +1,28 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
 import {TodoService} from "../core/services/todo.service";
 import {TestService} from "../core/services/test.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent {
+export class TodoListComponent implements OnInit, OnDestroy {
 
   todos: Todo[] = this.todoService.todos;
   errorMessage = "";
+  sub!: Subscription;
 
   constructor(private todoService: TodoService,
               private testService: TestService) {
+  }
+
+  ngOnInit(): void {
+    this.todoService.todoChanged.subscribe({
+      next: arrTodos => this.todos = arrTodos
+    })
   }
 
   clearErrorMessage() {
@@ -29,16 +37,17 @@ export class TodoListComponent {
     }
 
     this.todoService.addTodo(todo);
-    this.todos = this.todoService.todos;
   }
 
   deleteTodo(i: number) {
     this.todoService.deleteTodo(i);
-    this.todos = this.todoService.todos;
   }
 
   changeTodoStatus(index: number) {
     this.todoService.changeTodoStatus(index);
-    this.todos = this.todoService.todos;
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
