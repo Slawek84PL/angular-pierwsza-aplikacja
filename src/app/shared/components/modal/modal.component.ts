@@ -1,5 +1,5 @@
 import {Component, ContentChild, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {filter, map, of, Subscription, switchMap, tap} from "rxjs";
+import {BehaviorSubject, Subject, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-modal',
@@ -11,7 +11,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() title!: string;
   @Output() close = new EventEmitter<void>();
   @ContentChild('modalDiv') modalDiv!: ElementRef;
-  sub!: Subscription;
+  sub: Subscription = new Subscription();
 
   ngOnInit(): void {
     // this.sub = of("Zasubskrybowana wiadomość").subscribe({
@@ -24,6 +24,12 @@ export class ModalComponent implements OnInit, OnDestroy {
       .subscribe({
         next: numb => console.log(numb)
       });
+    const subject = new Subject<number>();
+
+    this.sub.add(subject.subscribe({
+      next: value => console.log(value)
+    }))
+    subject.next(5);
     console.log(this.sub);
   }
 
