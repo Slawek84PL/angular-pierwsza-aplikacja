@@ -26,7 +26,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.sub.add(subject.subscribe({
       next: value => console.log(value)
     }))
-    
+
     bSubject.next(10);
     this.sub.add(bSubject.subscribe({
       next: value => console.log(value)
@@ -35,6 +35,9 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
     console.log(this.sub);
   }
 
