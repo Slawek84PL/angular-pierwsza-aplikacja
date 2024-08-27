@@ -19,11 +19,6 @@ export class ModalComponent implements OnInit, OnDestroy {
     //   error: err => console.log(err),
     //   complete: () => console.log("Zakończona subskrpcja wartości")
     // })
-    of(1).pipe(
-      tap(n => console.log(n)))
-      .subscribe({
-        next: numb => console.log(numb)
-      });
     const subject = new Subject<number>();
 
     this.sub.add(subject.subscribe({
