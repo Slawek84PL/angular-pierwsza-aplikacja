@@ -20,16 +20,22 @@ export class ModalComponent implements OnInit, OnDestroy {
     //   complete: () => console.log("Zakończona subskrpcja wartości")
     // })
     const subject = new Subject<number>();
+    const bSubject = new BehaviorSubject<number>(5);
 
+    subject.next(5);
     this.sub.add(subject.subscribe({
       next: value => console.log(value)
     }))
-    subject.next(5);
+    
+    bSubject.next(10);
+    this.sub.add(bSubject.subscribe({
+      next: value => console.log(value)
+    }))
     console.log(this.sub);
   }
 
   ngOnDestroy(): void {
-    // console.log(this.sub);
+    console.log(this.sub);
   }
 
   onClose() {
