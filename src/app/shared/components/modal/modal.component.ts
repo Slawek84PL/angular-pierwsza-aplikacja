@@ -1,5 +1,5 @@
-import {Component, ContentChild, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {Subscription} from "rxjs";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {defer, from, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-modal',
@@ -10,8 +10,7 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   @Input() title!: string;
   @Output() close = new EventEmitter<void>();
-  @ContentChild('modalDiv') modalDiv!: ElementRef;
-  sub = Subscription;
+  sub = new Subscription;
 
   ngOnInit(): void {
     // this.sub = of("Zasubskrybowana wiadomość").subscribe({
@@ -19,12 +18,18 @@ export class ModalComponent implements OnInit, OnDestroy {
     //   error: err => console.log(err),
     //   complete: () => console.log("Zakończona subskrpcja wartości")
     // })
-    const event = new EventEmitter<string>;
-    event.subscribe({
-      next: (value: string) => console.log(value)
-    })
-    event.next("Test");
-    console.log(this.sub);
+    // console.log(this.sub);
+    const promis = () => new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log("Test");
+        resolve("Hello World");
+      }, 1000)
+    });
+    const obs$ = defer(() => from(promis()));
+    this.sub = obs$.subscribe({
+      next: value => console.log(value)
+    });
+    console.log(this.sub)
   }
 
   ngOnDestroy(): void {
