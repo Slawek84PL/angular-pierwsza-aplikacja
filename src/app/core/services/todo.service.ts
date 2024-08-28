@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Todo} from "../../shared/interfaces/todo.interface";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import {Todo} from "../../shared/interfaces/todo.interface";
 export class TodoService {
 
   private _todos: Todo[] = JSON.parse(localStorage.getItem("todos")!) ?? [];
+  todoChanged = new Subject<Todo[]>();
 
   constructor() { }
 
@@ -17,11 +19,14 @@ export class TodoService {
   addTodo(name: string): void {
     this._todos.push({name, isCompleted: false});
     this.saveToLocaleStorage()
+
+    this.todoChanged.next(this.todos);
   }
 
   deleteTodo(i: number) {
     this._todos = this.todos.filter((todo, index) => index !== i)
     this.saveToLocaleStorage();
+    this.todoChanged.next(this.todos);
   }
 
   changeTodoStatus(index: number) {
@@ -30,6 +35,7 @@ export class TodoService {
       isCompleted: !this.todos[index].isCompleted
     }
     this.saveToLocaleStorage();
+    this.todoChanged.next(this.todos);
   }
 
   saveToLocaleStorage() {
