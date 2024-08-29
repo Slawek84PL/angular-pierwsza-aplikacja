@@ -8,8 +8,9 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class AddTodoFormComponent {
 
   @Output() addTodo = new EventEmitter<string>();
+  todoName = "";
 
-  addNewTodo(value: string) {
-    this.addTodo.emit(value);
+  addNewTodo() {
+    this.addTodo.emit(this.todoName);
   }
 }
