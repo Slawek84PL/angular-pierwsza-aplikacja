@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NgForm} from "@angular/forms";
 
 @Component({
@@ -6,18 +6,12 @@ import {NgForm} from "@angular/forms";
   templateUrl: './add-todo-form.component.html',
   styleUrls: ['./add-todo-form.component.css']
 })
-export class AddTodoFormComponent implements AfterViewInit {
-  @Output() addTodo = new EventEmitter<string>();
+export class AddTodoFormComponent {
 
-  @ViewChild('form') todoForm!: NgForm;
+  @Output() addTodo = new EventEmitter<string>();
   todoName = "";
 
-  addNewTodo(form: NgForm) {
-    console.log(form);
+  addNewTodo() {
     this.addTodo.emit(this.todoName);
-  }
-
-  ngAfterViewInit(): void {
-    console.log(this.todoForm);
   }
 }
