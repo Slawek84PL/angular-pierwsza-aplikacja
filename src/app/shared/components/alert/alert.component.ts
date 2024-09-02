@@ -9,6 +9,7 @@ export class AlertComponent {
 
   @Input() errorAlertMessage!: string;
   @Output() clearAlertMessage = new EventEmitter<void>();
+  @Input() showButton = false;
 
   clearErrorMessage() {
     this.clearAlertMessage.emit();
