@@ -10,10 +10,10 @@ export class AddTodoFormComponent {
 
   @Output() addTodo = new EventEmitter<string>();
   todoName = "";
-  person = {name: 'test', surname: 'testowy', role: 'father'};
+  // person = {name: 'test', surname: 'testowy', role: 'father'};
 
   addNewTodo() {
-    console.log(this.person)
+    // console.log(this.person)
     this.addTodo.emit(this.todoName);
   }
 }
