@@ -13,7 +13,8 @@ import localePl from '@angular/common/locales/pl';
 import {registerLocaleData} from "@angular/common";
 import {FirstLetterUppercasePipe} from './shared/pipes/first-letter-uppercase.pipe';
 import {FormsModule} from "@angular/forms";
-import { FirstLetterDirective } from './shared/directives/first-letter.directive';
+import {FirstLetterDirective} from './shared/directives/first-letter.directive';
+import {AppRoutingModule} from "./app-routing.module";
 
 registerLocaleData(localePl)
 
@@ -30,13 +31,15 @@ registerLocaleData(localePl)
     FirstLetterUppercasePipe,
     FirstLetterDirective
   ],
-    imports: [
-        BrowserModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    AppRoutingModule,
+  ],
   providers: [
     {provide: LOCALE_ID, useValue: 'pl'},
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
