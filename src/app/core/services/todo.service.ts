@@ -16,7 +16,7 @@ export class TodoService {
     return this._todos.slice();
   }
 
-  getById(index: number): Todo {
+  getByIndex(index: number): Todo | undefined {
     return this.todos[index];
   }
 
