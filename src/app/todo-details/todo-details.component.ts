@@ -19,9 +19,12 @@ export class TodoDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = +this.route.snapshot.params['id'];
+    this.todo = this.todoService.getByIndex(this.id)
   }
 
-  navigateTonextTodo() {
+
+  navigateToNextTodo() {
     this.router.navigate(['/todo', this.id + 1]);
   }
 }
