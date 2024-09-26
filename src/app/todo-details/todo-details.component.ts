@@ -32,6 +32,10 @@ export class TodoDetailsComponent implements OnInit {
       this.id = Number(params.get('id'));
       this.todo = this.todoService.getByIndex(this.id)
     })
+
+    this.route.queryParams.subscribe(params => {
+      console.log(params)
+    })
   }
 
 
