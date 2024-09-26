@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Todo} from "../../shared/interfaces/todo.interface";
-import {Router} from "@angular/router";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 
 @Component({
   selector: 'app-todo',
@@ -36,7 +36,7 @@ export class TodoComponent {
   // ngDoCheck(): void {
   //   console.log("ngDoCheck został wykonany");
   // }
-  constructor(private router: Router) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
   }
   //
 
@@ -65,6 +65,9 @@ export class TodoComponent {
   }
 
   navigateToDetails() {
-    this.router.navigate(['/todo', this.i]);
+    const navigationExtras: NavigationExtras = {
+      relativeTo: this.activatedRoute
+    }
+    this.router.navigate([this.i], navigationExtras);
   }
 }
