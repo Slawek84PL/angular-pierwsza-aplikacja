@@ -16,6 +16,10 @@ export class TodoService {
     return this._todos.slice();
   }
 
+  getByIndex(index: number): Todo | undefined {
+    return this.todos[index];
+  }
+
   addTodo(name: string): void {
     this._todos.push({name, isCompleted: false});
     this.saveToLocaleStorage()

@@ -1,5 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Todo} from "../../shared/interfaces/todo.interface";
+import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 
 @Component({
   selector: 'app-todo',
@@ -35,10 +36,8 @@ export class TodoComponent {
   // ngDoCheck(): void {
   //   console.log("ngDoCheck został wykonany");
   // }
-  // constructor() {
-
-  //   console.log('Konstruktor ' + this.todo);
-  // }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  }
   //
 
   // ngOnInit(): void {
@@ -63,5 +62,14 @@ export class TodoComponent {
 
   deleteTodo() {
     this.delete.emit();
+  }
+
+  navigateToDetails() {
+    const navigationExtras: NavigationExtras = {
+      relativeTo: this.activatedRoute,
+      state: {example: 'test'}
+      // queryParams: {id: this.i, test: 'wartość'}
+    }
+    this.router.navigate([this.i], navigationExtras);
   }
 }

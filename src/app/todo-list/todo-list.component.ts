@@ -1,19 +1,17 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
 import {TodoService} from "../core/services/todo.service";
 import {TestService} from "../core/services/test.service";
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent implements OnInit, OnDestroy {
+export class TodoListComponent implements OnInit {
 
   todos: Todo[] = this.todoService.todos;
   errorMessage = "";
-  sub!: Subscription;
 
   constructor(private todoService: TodoService,
               private testService: TestService) {
@@ -45,9 +43,5 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   changeTodoStatus(index: number) {
     this.todoService.changeTodoStatus(index);
-  }
-
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
   }
 }
