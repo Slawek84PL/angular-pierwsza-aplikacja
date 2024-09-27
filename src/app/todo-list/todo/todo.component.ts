@@ -67,7 +67,8 @@ export class TodoComponent {
   navigateToDetails() {
     const navigationExtras: NavigationExtras = {
       relativeTo: this.activatedRoute,
-      queryParams: {id: this.i, test: 'wartość'}
+      state: {example: 'test'}
+      // queryParams: {id: this.i, test: 'wartość'}
     }
     this.router.navigate([this.i], navigationExtras);
   }
