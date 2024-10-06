@@ -46,7 +46,6 @@ export class TodoListComponent implements OnInit {
         this.errorMessage = "Wystąpił błąd. Spróbuj ponownie.";
       }
     })
-    this.todoService.addTodo(todo);
   }
 
   deleteTodo(i: number) {
