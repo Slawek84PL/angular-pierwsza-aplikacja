@@ -26,9 +26,8 @@ export class TodoListComponent implements OnInit {
 
     if (this.todoService.todos.length === 0) {
       this.todoApiService.getTodos().subscribe({
-        next: todos => {
-          // console.log(todos)
-          // this.todos = todos
+        error: err => {
+          this.errorMessage = "Wystąpił błąd. Spróbuj ponownie.";
         }
       })
     }
@@ -39,12 +38,14 @@ export class TodoListComponent implements OnInit {
   }
 
   addTodo(todo: string): void {
-
-    if (todo.length <= 3) {
-      this.errorMessage = "Zadanie powinno mieć conajmniej 4 znaki";
-      return;
-    }
-
+    this.todoApiService.postTodo({name: todo, isCompleted: false}).subscribe({
+      next: value => {
+        console.log(value);
+      },
+      error: err => {
+        this.errorMessage = "Wystąpił błąd. Spróbuj ponownie.";
+      }
+    })
     this.todoService.addTodo(todo);
   }
 
