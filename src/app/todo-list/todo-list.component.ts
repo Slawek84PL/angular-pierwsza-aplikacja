@@ -24,12 +24,14 @@ export class TodoListComponent implements OnInit {
       next: arrTodos => this.todos = arrTodos
     })
 
-    this.todoApiService.getTodos().subscribe({
-        next: todos =>
+    if (this.todoService.todos.length === 0) {
+      this.todoApiService.getTodos().subscribe({
+        next: todos => {
           // console.log(todos)
-          this.todos = todos
-      }
-    )
+          // this.todos = todos
+        }
+      })
+    }
   }
 
   clearErrorMessage() {
