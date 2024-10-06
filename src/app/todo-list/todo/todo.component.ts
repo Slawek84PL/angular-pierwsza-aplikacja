@@ -15,6 +15,7 @@ import {ActivatedRoute, NavigationExtras, Router} from "@angular/router";
 export class TodoComponent {
   @Input() todo!: Todo;
 
+  @Input() id!: number;
   @Input() i!: number;
   @Output() delete = new EventEmitter<void>();
   @Output() changeStatus = new EventEmitter<number>();
@@ -53,7 +54,7 @@ export class TodoComponent {
   // }
 
   changeTodoStatus() {
-    this.changeStatus.emit(this.i);
+    this.changeStatus.emit(this.id);
   }
 
   toggleModal(): void {
@@ -70,6 +71,6 @@ export class TodoComponent {
       state: {example: 'test'}
       // queryParams: {id: this.i, test: 'wartość'}
     }
-    this.router.navigate([this.i], navigationExtras);
+    this.router.navigate([this.id], navigationExtras);
   }
 }

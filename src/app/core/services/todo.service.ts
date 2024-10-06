@@ -36,16 +36,15 @@ export class TodoService {
     this.todoChanged.next(this.todos);
   }
 
-  changeTodoStatus(index: number) {
-    this._todos[index] = {
-      ...this.todos[index],
-      isCompleted: !this.todos[index].isCompleted
+  changeTodoStatus(id: number, isComplited: boolean) {
+    const seartchedTodo = this.todos.find(todo=> todo.id === id);
+    if (seartchedTodo) {
+      seartchedTodo.isCompleted = isComplited;
     }
-    this.saveToLocaleStorage();
     this.todoChanged.next(this.todos);
   }
 
-  saveToLocaleStorage() {
-    localStorage.setItem("todos", JSON.stringify(this.todos));
-  }
+  // saveToLocaleStorage() {
+  //   localStorage.setItem("todos", JSON.stringify(this.todos));
+  // }
 }

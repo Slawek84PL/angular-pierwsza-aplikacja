@@ -56,7 +56,11 @@ export class TodoListComponent implements OnInit {
     })
   }
 
-  changeTodoStatus(index: number) {
-    this.todoService.changeTodoStatus(index);
+  changeTodoStatus(id: number, todo: Todo) {
+    this.todoApiService.patchTodo(id, {isCompleted: !todo.isCompleted}).subscribe({
+      error: err => {
+        this.errorMessage = "Wystąpił błąd. Spróbuj ponownie.";
+      }
+    })
   }
 }
