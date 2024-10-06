@@ -22,10 +22,6 @@ export class TodoService {
     this.todoChanged.next(this.todos)
   }
 
-  getByIndex(index: number): Todo | undefined {
-    return this.todos[index];
-  }
-
   addTodo(todo: Todo): void {
     this._todos.push(todo);
     this.todoChanged.next(this.todos);
@@ -43,8 +39,4 @@ export class TodoService {
     }
     this.todoChanged.next(this.todos);
   }
-
-  // saveToLocaleStorage() {
-  //   localStorage.setItem("todos", JSON.stringify(this.todos));
-  // }
 }
