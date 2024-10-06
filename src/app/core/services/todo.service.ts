@@ -7,7 +7,8 @@ import {Subject} from "rxjs";
 })
 export class TodoService {
 
-  private _todos: Todo[] = JSON.parse(localStorage.getItem("todos")!) ?? [];
+  // private _todos: Todo[] = JSON.parse(localStorage.getItem("todos")!) ?? [];
+  private _todos: Todo[] = [];
   todoChanged = new Subject<Todo[]>();
 
   constructor() { }
@@ -16,33 +17,26 @@ export class TodoService {
     return this._todos.slice();
   }
 
-  getByIndex(index: number): Todo | undefined {
-    return this.todos[index];
+  public set todos(arrTodos: Todo[]) {
+    this._todos = [...arrTodos];
+    this.todoChanged.next(this.todos)
   }
 
-  addTodo(name: string): void {
-    this._todos.push({name, isCompleted: false});
-    this.saveToLocaleStorage()
-
+  addTodo(todo: Todo): void {
+    this._todos.push(todo);
     this.todoChanged.next(this.todos);
   }
 
-  deleteTodo(i: number) {
-    this._todos = this.todos.filter((todo, index) => index !== i)
-    this.saveToLocaleStorage();
+  deleteTodo(id: number) {
+    this._todos = this.todos.filter((todo, index) => todo.id !== id)
     this.todoChanged.next(this.todos);
   }
 
-  changeTodoStatus(index: number) {
-    this._todos[index] = {
-      ...this.todos[index],
-      isCompleted: !this.todos[index].isCompleted
+  changeTodoStatus(id: number, isComplited: boolean) {
+    const seartchedTodo = this.todos.find(todo=> todo.id === id);
+    if (seartchedTodo) {
+      seartchedTodo.isCompleted = isComplited;
     }
-    this.saveToLocaleStorage();
     this.todoChanged.next(this.todos);
-  }
-
-  saveToLocaleStorage() {
-    localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 }
