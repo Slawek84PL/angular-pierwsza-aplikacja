@@ -26,4 +26,8 @@ export class TodoApiService {
       tap((todo: Todo) => this.todoService.addTodo(todo))
     );
   }
+
+  deleteTodo(id: number): Observable<any> {
+    return this.http.delete<any>(`http://localhost:3000/todo/${id}`);
+  }
 }
