@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Todo} from "../shared/interfaces/todo.interface";
 import {TodoService} from "../core/services/todo.service";
 import {TestService} from "../core/services/test.service";
+import {TodoApiService} from "../core/services/todo-api.service";
 
 @Component({
   selector: 'app-todo-list',
@@ -14,13 +15,21 @@ export class TodoListComponent implements OnInit {
   errorMessage = "";
 
   constructor(private todoService: TodoService,
-              private testService: TestService) {
+              private testService: TestService,
+              private todoApiService: TodoApiService) {
   }
 
   ngOnInit(): void {
     this.todoService.todoChanged.subscribe({
       next: arrTodos => this.todos = arrTodos
     })
+
+    this.todoApiService.getTodos().subscribe({
+        next: todos =>
+          // console.log(todos)
+          this.todos = todos
+      }
+    )
   }
 
   clearErrorMessage() {
